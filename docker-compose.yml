@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:15
+    container_name: picture_db
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    expose:
+      - 5432
+    env_file: dev.env
+
+  app:
+    build: .
+    container_name: picture_app
+    env_file: dev.env
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app
+    depends_on:
+      - db
