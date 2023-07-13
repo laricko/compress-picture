@@ -19,7 +19,7 @@ import service
 router = APIRouter()
 
 
-@router.post("/upload-picture")
+@router.post("/upload-picture", status_code=status.HTTP_201_CREATED)
 async def upload_picture(
     file: UploadFile,
     width: Annotated[int, Form()],
